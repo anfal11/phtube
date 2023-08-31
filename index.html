@@ -40,18 +40,39 @@
     <main class="w-3/4 mx-auto pt-8">
         <section class="gap-6 justify-center items-center flex md:flex-row flex-wrap mb-10">
             <div class="all-btn" id="all-view">
-                <button class="bg-[#FF1F3D] text-white text-sm font-medium px-5 py-2 rounded">All</button>
+                <button class="bg-[#FF1F3D] text-white text-sm font-medium px-5 py-2 rounded" onclick="allBtn()">All</button>
             </div>
             <div class="music-btn" id="music-view">
-                <button class="bg-[#25252526] text-black text-sm font-medium px-5 py-2 rounded">Music</button>
+                <button class="bg-[#25252526] text-black text-sm font-medium px-5 py-2 rounded" onclick="musicBtn()">Music</button>
             </div>
             <div class="comedy-btn" id="comedy-view">
-                <button class="bg-[#25252526] text-black text-sm font-medium px-5 py-2 rounded">Comedy</button>
+                <button class="bg-[#25252526] text-black text-sm font-medium px-5 py-2 rounded" onclick="comedyBtn()">Comedy</button>
             </div>
             <div class="drawing-btn" id="drawing-view">
-                <button class="bg-[#25252526] text-black text-sm font-medium px-5 py-2 rounded" disabled>Drawing</button>
+                <button class="bg-[#25252526] text-black text-sm font-medium px-5 py-2 rounded" onclick="drawingBtn()" disabled>Drawing</button>
             </div>
         </section>
+
+        <!-- Video shows API parts -->
+        <section id="video-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 w-3/4 mx-auto">
+            <!-- <div class="card w-96 bg-base-100">
+                <figure><img id="thumbnail" src=""/></figure>
+                <div class="card-body">
+                  <div class="flex flex-row">
+                    <figure> <img class="rounded-full" src="" alt=""></figure>
+                  <h2 class="card-title">Building a Winning UX Strategy Using the Kano Model</h2>
+                  </div>
+                  <div class="grid grid-cols-2">
+                    <p id="user-name">Awlad Hossain</p>
+                    <img id="blue-badge" src="./images/fi_10629607.svg" alt="">
+                  </div>
+                  <p id="views" class="">91K views</p>
+                </div>
+              </div> -->
+
+        </section>
     </main>
+
+    <script src="./JavaScript/app.js"></script>
 </body>
 </html>
