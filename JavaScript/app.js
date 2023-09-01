@@ -56,20 +56,20 @@ const drawingBtn = async () => {
     const videoContainer = document.getElementById('video-container');
 
     if (res === null || typeof res === 'undefined') {
-
         videoContainer.innerHTML = `
-        <div class="flex flex-row mx-auto items-center justify-center">
-            <figure>
-                <img id="img-no-data" class="mx-auto" src="./images/Icon.png" alt="" />
-                <figcaption>
-                    <h1 class="text-2xl text-center font-bold">Oops!! Sorry, There is no 
-                    content here</h1>
-                </figcaption>
-            </figure>
+        <div class="flex items-center justify-center h-full w-full">
+            <div class="mx-auto text-center">
+                <figure>
+                    <img id="img-no-data" class="mx-auto" src="./images/Icon.png" alt="" />
+                    <figcaption>
+                        <h1 class="text-2xl text-center font-bold">Oops!! Sorry, There is no content here</h1>
+                    </figcaption>
+                </figure>
+            </div>
         </div>
         `;
     } else {
-        
+
         videoContainer.innerHTML = '';
 
         res.data.forEach((video) => {
@@ -82,7 +82,7 @@ const drawingBtn = async () => {
                         <figure><img class="rounded-full w-10 h-10" src=${video?.authors?.[0].profile_picture}/></figure>
                         <h2 class="font-bold text-base">${video?.title}</h2>
                     </div>
-                    <div class="grid grid-cols-2">
+                    <div class="grid grid-cols-2 relative">
                         <p id="user-name" class="text-base">${video?.authors?.[0].profile_name}</p>
                         <img id="blue-badge" src="${video?.authors?.[0].verified ? './images/fi_10629607.svg' : ''}" />
                     </div>
@@ -94,6 +94,20 @@ const drawingBtn = async () => {
     }
 }
 
+const sortBtn = () => {
+    const videoContainer = document.getElementById('video-container');
+    const videos = videoContainer.children;
+    const videosArr = [...videos];
+    
+    videosArr.sort((a, b) => {
+        const aViews = parseInt(a.querySelector('#views').innerText.replace('K', '').replace('M', '').replace('B', ''));
+        const bViews = parseInt(b.querySelector('#views').innerText.replace('K', '').replace('M', '').replace('B', '')); 
+        return bViews - aViews;
+    });
+
+    videoContainer.innerHTML = '';
+    videosArr.forEach(video => videoContainer.appendChild(video));
+}
 
 
 
