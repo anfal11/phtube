@@ -1,3 +1,5 @@
+// main function where api is fetching 
+
 const loadVideos = async (id) => {
   try {
     const response = await fetch(
@@ -14,13 +16,33 @@ const loadVideos = async (id) => {
   }
 };
 
+// display all api datas here
+
 const displayVideos = (videos) => {
   const videoContainer = document.getElementById("video-container");
 
   videoContainer.innerText = "";
 
   videos.forEach((video) => {
-   
+
+    // this is for dynamic buttons
+    const sec = document.getElementById ('dynamic-btn')
+    sec.innerHTML = `
+    <div class="all-btn" id="all-view">
+    <button class="bg-[#25252526] text-black text-sm font-medium px-5 py-2 rounded hover:bg-[#FF1F3D] hover:text-white" onclick="allBtn()">All</button>
+</div>
+<div class="music-btn" id="music-view">
+    <button class="bg-[#25252526] text-black text-sm font-medium px-5 py-2 rounded hover:bg-[#FF1F3D] hover:text-white" onclick="musicBtn()">Music</button>
+</div>
+<div class="comedy-btn" id="comedy-view">
+    <button class="bg-[#25252526] text-black text-sm font-medium px-5 py-2 rounded hover:bg-[#FF1F3D] hover:text-white" onclick="comedyBtn()">Comedy</button>
+</div>
+<div class="drawing-btn" id="drawing-view">
+    <button class="bg-[#25252526] text-black text-sm font-medium px-5 py-2 rounded hover:bg-[#FF1F3D] " onclick="drawingBtn()">Drawing</button>
+</div>
+    `
+
+//    this is for dynamic times
         const postedDateInSeconds = video?.others?.posted_date || 0; 
 
         function formatTime(timeInSeconds) {
@@ -36,6 +58,7 @@ const displayVideos = (videos) => {
 
     const formattedTime = formatTime(postedDateInSeconds);
 
+    // This is for dynamic cards
     const div = document.createElement("div");
     div.classList = `card bg-base-100 rounded-box`;
     div.innerHTML = `
@@ -64,7 +87,7 @@ const displayVideos = (videos) => {
     videoContainer.appendChild(div);
   });
 };
-
+// buttons called
 loadVideos(1000);
 
 const allBtn = () => {
@@ -80,18 +103,16 @@ const comedyBtn = () => {
 const drawingBtn = async () => {
   const res = await loadVideos(1005);
   const videoContainer = document.getElementById("video-container");
-
+// condition check for no data
   if (res === null || typeof res === "undefined") {
     videoContainer.innerHTML = `
         <div class="grid grid-cols-1 col-span-4 justify-center items-center">
-           
                 <figure class="">
                     <img id="img-no-data" class="mx-auto" src="./images/Icon.png" alt="" />
                     <figcaption>
-                        <h1 class="text-2xl text-center font-bold">Oops!! Sorry, There is no content here</h1>
+                        <h1 class="text-2xl text-center font-bold mt-4">Oops!! Sorry, There is no content here</h1>
                     </figcaption>
                 </figure>
-         
         </div>
         `;
   } else {
@@ -119,6 +140,7 @@ const drawingBtn = async () => {
   }
 };
 
+// sortings by descending order
 const sortBtn = () => {
   const videoContainer = document.getElementById("video-container");
   const videos = videoContainer.children;
