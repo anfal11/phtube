@@ -38,7 +38,7 @@ const displayVideos = (videos) => {
     <button class="bg-[#25252526] text-black text-sm font-medium px-5 py-2 rounded hover:bg-[#FF1F3D] hover:text-white" onclick="comedyBtn()">Comedy</button>
 </div>
 <div class="drawing-btn" id="drawing-view">
-    <button class="bg-[#25252526] text-black text-sm font-medium px-5 py-2 rounded hover:bg-[#FF1F3D] " onclick="drawingBtn()">Drawing</button>
+    <button class="bg-[#25252526] text-black text-sm font-medium px-5 py-2 rounded hover:bg-[#FF1F3D] hover:text-white" onclick="drawingBtn()">Drawing</button>
 </div>
     `
 
@@ -63,7 +63,7 @@ const displayVideos = (videos) => {
     div.classList = `card bg-base-100 rounded-box`;
     div.innerHTML = `
   <figure style="position: relative;">
-    <img id="thumbnail" class="w-[420px] h-48 rounded-lg" src='${video?.thumbnail}'/>
+    <img id="thumbnail" class="w-[420px] h-48 object-cover rounded-lg" src='${video?.thumbnail}'/>
     <div class="absolute bottom-2 right-2 bg-opacity-70 bg-black text-white p-1 rounded-md"> ${formattedTime}</div>
   </figure>
   <div class="card-footer flex justify-left gap-4 mt-8 py-3">
