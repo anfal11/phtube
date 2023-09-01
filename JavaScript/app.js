@@ -30,7 +30,7 @@ const displayVideos = (videos) => {
                 </div>
                 <div class="grid grid-cols-2">
                     <p id="user-name" class="text-base">${video?.authors?.[0].profile_name}</p>
-                    <img id="blue-badge" src=${video?.authors?.[0].verified} alt="" />
+                    <img id="blue-badge" src="${video?.authors?.[0].verified ? './images/fi_10629607.svg' : ''}" />
                 </div>
                 <p id="views">${video?.others?.views}</p>
             </div>
@@ -50,28 +50,54 @@ const musicBtn = () => {
 const comedyBtn = () => {
     loadVideos(1003);
 }
+
 const drawingBtn = async () => {
     const res = await loadVideos(1005);
     const videoContainer = document.getElementById('video-container');
 
-    if (!res) {
+    if (res === null || typeof res === 'undefined') {
+
         videoContainer.innerHTML = `
-        <div class="flex flex-col items-center justify-center">
+        <div class="flex flex-row mx-auto items-center justify-center">
             <figure>
                 <img id="img-no-data" class="mx-auto" src="./images/Icon.png" alt="" />
                 <figcaption>
-                    <h1 class="text-2xl text-center font-bold">Oops!! Sorry, There is no content here</h1>
+                    <h1 class="text-2xl text-center font-bold">Oops!! Sorry, There is no 
+                    content here</h1>
                 </figcaption>
             </figure>
         </div>
         `;
     } else {
+        
         videoContainer.innerHTML = '';
+
+        res.data.forEach((video) => {
+            const div = document.createElement('div');
+            div.classList = 'card bg-base-100 rounded-box';
+            div.innerHTML = `
+                <figure><img id="thumbnail" class="w-4/5 lg:w-[312px] h-48 rounded-lg" src='${video?.thumbnail}'/></figure>
+                <div class="card-body">
+                    <div class="flex flex-row gap-2">
+                        <figure><img class="rounded-full w-10 h-10" src=${video?.authors?.[0].profile_picture}/></figure>
+                        <h2 class="font-bold text-base">${video?.title}</h2>
+                    </div>
+                    <div class="grid grid-cols-2">
+                        <p id="user-name" class="text-base">${video?.authors?.[0].profile_name}</p>
+                        <img id="blue-badge" src="${video?.authors?.[0].verified ? './images/fi_10629607.svg' : ''}" />
+                    </div>
+                    <p id="views">${video?.others?.views}</p>
+                </div>
+            `;
+            videoContainer.appendChild(div);
+        });
     }
 }
 
 
- 
+
+
+
 
 
 
