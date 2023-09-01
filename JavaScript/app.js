@@ -20,29 +20,47 @@ const displayVideos = (videos) => {
   videoContainer.innerText = "";
 
   videos.forEach((video) => {
-    console.log(video);
+   
+        const postedDateInSeconds = video?.others?.posted_date || 0; 
+
+        function formatTime(timeInSeconds) {
+            const hours = Math.floor(timeInSeconds / 3600);
+            const minutes = Math.floor((timeInSeconds % 3600) / 60);
+  
+        if (hours > 0) {
+             return `${hours} hours ${minutes} minutes ago`;
+        } else {
+             return '';
+         }
+    }
+
+    const formattedTime = formatTime(postedDateInSeconds);
+
     const div = document.createElement("div");
     div.classList = `card bg-base-100 rounded-box`;
     div.innerHTML = `
-        <figure><img id="thumbnail" class="w-[420px] h-48 rounded-lg" src='${video?.thumbnail}'/></figure>
-        <div class="card-footer flex justify-left gap-4 mt-8 py-3">
-                <div>
-                    <div class="avatar online">
-                        <div class="w-10 rounded-full">
-                            <img class="rounded-full w-10 h-10" src=${video?.authors?.[0].profile_picture}/>
-                        </div>
-                    </div>
-                </div>
-            <div class="space-y-2">
-              <h2 class="font-bold text-base">${video?.title}</h2>
-              <div>
-              <p id="user-name" class="inline text-base">${video?.authors?.[0].profile_name}</p>
-              <img id="blue-badge" class='inline-block' src="${video?.authors?.[0].verified ? "./images/fi_10629607.svg" : ""}" />
-              <p id="views">${video?.others?.views}</p>
-              </div>
-            </div>
+  <figure style="position: relative;">
+    <img id="thumbnail" class="w-[420px] h-48 rounded-lg" src='${video?.thumbnail}'/>
+    <div class="absolute bottom-2 right-2 bg-opacity-70 bg-black text-white p-1 rounded-md"> ${formattedTime}</div>
+  </figure>
+  <div class="card-footer flex justify-left gap-4 mt-8 py-3">
+    <div>
+      <div class="avatar online">
+        <div class="w-10 rounded-full">
+          <img class="rounded-full w-10 h-10" src=${video?.authors?.[0].profile_picture}/>
         </div>
-        `;
+      </div>
+    </div>
+    <div class="space-y-2">
+      <h2 class="font-bold text-base">${video?.title}</h2>
+      <div>
+        <p id="user-name" class="inline text-base">${video?.authors?.[0].profile_name}</p>
+        <img id="blue-badge" class='inline-block' src="${video?.authors?.[0].verified ? "./images/fi_10629607.svg" : ""}" />
+        <p id="views">${video?.others?.views}</p>
+      </div>
+    </div>
+  </div>
+`;
     videoContainer.appendChild(div);
   });
 };
@@ -83,25 +101,15 @@ const drawingBtn = async () => {
       const div = document.createElement("div");
       div.classList = "card bg-base-100 rounded-box";
       div.innerHTML = `
-                <figure><img id="thumbnail" class="w-4/5 lg:w-[312px] h-48 rounded-lg" src='${
-                  video?.thumbnail
-                }'/></figure>
+                <figure><img id="thumbnail" class="w-4/5 lg:w-[312px] h-48 rounded-lg" src='${video?.thumbnail}'/></figure>
                 <div class="card-body">
                     <div class="flex flex-row justify-center items-center gap-2">
-                        <figure><img class="rounded-full w-10 h-10" src=${
-                          video?.authors?.[0].profile_picture
-                        }/></figure>
+                        <figure><img class="rounded-full w-10 h-10" src=${video?.authors?.[0].profile_picture}/></figure>
                         <h2 class="font-bold text-base">${video?.title}</h2>
                     </div>
                     <div class="grid grid-cols-2">
-                        <p id="user-name" class="text-base">${
-                          video?.authors?.[0].profile_name
-                        }</p>
-                        <img id="blue-badge" src="${
-                          video?.authors?.[0].verified
-                            ? "./images/fi_10629607.svg"
-                            : ""
-                        }" />
+                        <p id="user-name" class="text-base">${video?.authors?.[0].profile_name}</p>
+                        <img id="blue-badge" src="${video?.authors?.[0].verified? "./images/fi_10629607.svg": ""}" />
                     </div>
                     <p id="views">${video?.others?.views}</p>
                 </div>
