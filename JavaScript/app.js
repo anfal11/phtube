@@ -39,5 +39,40 @@ const displayVideos = (videos) => {
     });
 }
 
-
 loadVideos(1000);
+
+const allBtn = () => {
+    loadVideos(1000);
+}
+const musicBtn = () => {
+    loadVideos(1001);
+}
+const comedyBtn = () => {
+    loadVideos(1003);
+}
+const drawingBtn = async () => {
+    const res = await loadVideos(1005);
+    const videoContainer = document.getElementById('video-container');
+
+    if (!res) {
+        videoContainer.innerHTML = `
+        <div class="flex flex-col items-center justify-center">
+            <figure>
+                <img id="img-no-data" class="mx-auto" src="./images/Icon.png" alt="" />
+                <figcaption>
+                    <h1 class="text-2xl text-center font-bold">Oops!! Sorry, There is no content here</h1>
+                </figcaption>
+            </figure>
+        </div>
+        `;
+    } else {
+        videoContainer.innerHTML = '';
+    }
+}
+
+
+ 
+
+
+
+
