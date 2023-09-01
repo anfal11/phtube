@@ -22,11 +22,11 @@ const displayVideos = (videos) => {
         const div = document.createElement('div');
         div.classList = `card bg-base-100 rounded-box`;
         div.innerHTML = `
-            <figure><img id="thumbnail" class="w-4/5 lg:w-[312px] h-48 rounded-lg" src='${video?.thumbnail}' /></figure>
+            <figure><img id="thumbnail" class="w-4/5 lg:w-[312px] h-48 rounded-lg" src='${video?.thumbnail}'/></figure>
             <div class="card-body">
-                <div class="flex flex-row gap-3">
-                    <figure><img class="rounded-full w-10 h-10" src=${video?.authors?.[0].profile_picture}alt="" /></figure>
-                    <h2 class="card-title ">${video?.title}</h2>
+                <div class="flex flex-row gap-2">
+                    <figure><img class="rounded-full w-10 h-10" src=${video?.authors?.[0].profile_picture}/></figure>
+                    <h2 class="font-bold text-base">${video?.title}</h2>
                 </div>
                 <div class="grid grid-cols-2">
                     <p id="user-name" class="text-base">${video?.authors?.[0].profile_name}</p>
@@ -40,4 +40,4 @@ const displayVideos = (videos) => {
 }
 
 
-loadVideos(1001);
+loadVideos(1000);
